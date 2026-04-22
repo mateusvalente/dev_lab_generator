@@ -21,11 +21,11 @@ As senhas do gerador são fixas, sem valores dinâmicos:
 
 ## URLS padrão
 
-- Frontend: `http://localhost:3000`
-- Backend: `http://localhost:8000`
-- MySQL: `http://localhost:3306`
-- Oracle: `http://localhost:1521`
-- Admin do banco: `http://localhost:8080`
+- Frontend: [http://localhost:3000](http://localhost:3000)
+- Backend: [http://localhost:8000](http://localhost:8000)
+- MySQL: [http://localhost:3306](http://localhost:3306)
+- Oracle: [http://localhost:1521](http://localhost:1521)
+- Admin do banco: [http://localhost:8080](http://localhost:8080)
 
 ## Como usar
 
