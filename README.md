@@ -19,13 +19,13 @@ As senhas do gerador são fixas, sem valores dinâmicos:
 - Oracle SYS/SYSTEM: `admin`
 - Oracle app user `LABUSER`: `admin`
 
-## Portas padrão
+## URLS padrão
 
-- Frontend: `3000`
-- Backend: `8000`
-- MySQL: `3306`
-- Oracle: `1521`
-- Admin do banco: `8080`
+- Frontend: `http://localhost:3000`
+- Backend: `http://localhost:8000`
+- MySQL: `http://localhost:3306`
+- Oracle: `http://localhost:1521`
+- Admin do banco: `http://localhost:8080`
 
 ## Como usar
 
