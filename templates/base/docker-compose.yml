@@ -1,0 +1,79 @@
+services:
+  db:
+    image: mysql:8.4
+    container_name: {{PROJECT_NAME}}-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-labdb}
+      MYSQL_USER: ${MYSQL_USER:-labuser}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-labpass}
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p${MYSQL_ROOT_PASSWORD:-root}"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    networks:
+      default:
+        aliases:
+          - db
+
+  phpmyadmin:
+    image: phpmyadmin:5
+    container_name: {{PROJECT_NAME}}-phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${PHPMYADMIN_PORT:-8080}:80"
+
+  backend:
+    build:
+      context: ./backend
+    container_name: {{PROJECT_NAME}}-backend
+    restart: unless-stopped
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: ${MYSQL_DATABASE:-labdb}
+      DB_USER: ${MYSQL_USER:-labuser}
+      DB_PASSWORD: ${MYSQL_PASSWORD:-labpass}
+      PORT: ${BACKEND_PORT:-8000}
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+    ports:
+      - "${BACKEND_PORT:-8000}:${BACKEND_PORT:-8000}"
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: {{PROJECT_NAME}}-frontend
+    restart: unless-stopped
+    environment:
+      API_BASE_URL: http://localhost:${BACKEND_PORT:-8000}/api
+      PORT: ${FRONTEND_PORT:-3000}
+    volumes:
+      - ./frontend:/app
+      - frontend_node_modules:/app/node_modules
+    depends_on:
+      - backend
+    ports:
+      - "${FRONTEND_PORT:-3000}:${FRONTEND_PORT:-3000}"
+
+volumes:
+  db_data:
+  frontend_node_modules:

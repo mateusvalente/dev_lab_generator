@@ -1,0 +1,12 @@
+__pycache__/
+output/
+*.pyc
+.env
+node_modules/
+dist/
+.next/
+target/
+.output/
+.dist/
+.__pycache__/
+test_matrix.py
