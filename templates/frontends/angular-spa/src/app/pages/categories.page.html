@@ -1,0 +1,59 @@
+<section class="content-header">
+  <div>
+    <h2>Categorias</h2>
+    <p>Use esta pagina para estudar binding com <code>ngModel</code>, eventos e listagem.</p>
+  </div>
+</section>
+
+@if (error) {
+  <p class="alert">{{ error }}</p>
+}
+
+<form class="form-grid" (ngSubmit)="save()">
+  <label>
+    Nome
+    <input name="name" [(ngModel)]="form.name" required placeholder="Ex: Eletronicos" />
+  </label>
+
+  <label>
+    Descricao
+    <input name="description" [(ngModel)]="form.description" placeholder="Ex: Produtos de tecnologia" />
+  </label>
+
+  <div class="form-actions">
+    <button type="submit">{{ form.id ? 'Atualizar' : 'Adicionar' }}</button>
+    @if (form.id) {
+      <button type="button" class="secondary" (click)="reset()">Cancelar</button>
+    }
+  </div>
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Descricao</th>
+      <th>Acoes</th>
+    </tr>
+  </thead>
+  <tbody>
+    @if (loading) {
+      <tr><td colspan="4">Carregando...</td></tr>
+    } @else {
+      @for (item of categories; track item.id) {
+        <tr>
+          <td>{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.description }}</td>
+          <td class="row-actions">
+            <button type="button" class="secondary" (click)="edit(item)">Editar</button>
+            <button type="button" class="danger" (click)="remove(item)">Excluir</button>
+          </td>
+        </tr>
+      } @empty {
+        <tr><td colspan="4">Nenhuma categoria cadastrada.</td></tr>
+      }
+    }
+  </tbody>
+</table>

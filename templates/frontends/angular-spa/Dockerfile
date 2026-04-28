@@ -1,4 +1,6 @@
 FROM node:22-alpine
-RUN apk add --no-cache curl
 WORKDIR /app
-CMD ["sh", "-c", "npm install && npm start -- --host 0.0.0.0 --port ${PORT:-3000}"]
+COPY package*.json ./
+RUN npm install
+COPY . .
+CMD ["sh", "-c", "npm start -- --host 0.0.0.0 --port ${PORT:-3000}"]

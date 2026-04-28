@@ -2,15 +2,181 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>Angular SPA CRUD</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body { font-family: Arial, sans-serif; margin: 24px; }
-    input, select, button { margin: 4px; padding: 8px; }
-    table { border-collapse: collapse; width: 100%; margin-top: 12px; }
-    th, td { border: 1px solid #ddd; padding: 8px; }
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: #1f2937;
+      background: #f4f7fb;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    code {
+      background: #e8edf5;
+      border-radius: 4px;
+      padding: 2px 5px;
+    }
+    .app-header {
+      align-items: center;
+      background: #ffffff;
+      border-bottom: 1px solid #d9e0ea;
+      display: flex;
+      gap: 24px;
+      justify-content: space-between;
+      padding: 20px 32px;
+    }
+    .app-header h1 {
+      font-size: 24px;
+      margin: 0 0 6px;
+    }
+    .app-header p,
+    .content-header p,
+    .hero p {
+      color: #526173;
+      line-height: 1.5;
+      margin: 0;
+    }
+    .nav {
+      display: flex;
+      gap: 8px;
+    }
+    .nav a,
+    .button,
+    button {
+      border: 1px solid #2563eb;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      font-size: 14px;
+      justify-content: center;
+      min-height: 38px;
+      padding: 9px 14px;
+      text-decoration: none;
+    }
+    .nav a,
+    .button.secondary,
+    button.secondary {
+      background: #ffffff;
+      color: #2563eb;
+    }
+    .nav a.active,
+    .button,
+    button {
+      background: #2563eb;
+      color: #ffffff;
+    }
+    button.danger {
+      background: #dc2626;
+      border-color: #dc2626;
+      color: #ffffff;
+    }
+    .page-shell {
+      margin: 0 auto;
+      max-width: 1120px;
+      padding: 28px 24px;
+    }
+    .hero,
+    .content-header,
+    .form-grid,
+    table {
+      background: #ffffff;
+      border: 1px solid #d9e0ea;
+      border-radius: 8px;
+    }
+    .hero,
+    .content-header {
+      padding: 24px;
+    }
+    .hero h2,
+    .content-header h2 {
+      font-size: 22px;
+      margin: 0 0 10px;
+    }
+    .actions,
+    .form-actions,
+    .row-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .actions {
+      margin-top: 20px;
+    }
+    .form-grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin: 18px 0;
+      padding: 18px;
+    }
+    .product-form {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    label {
+      color: #374151;
+      display: grid;
+      font-size: 14px;
+      gap: 6px;
+    }
+    input,
+    select {
+      border: 1px solid #c8d2df;
+      border-radius: 6px;
+      font-size: 14px;
+      min-height: 38px;
+      padding: 8px 10px;
+      width: 100%;
+    }
+    .form-actions {
+      align-items: end;
+    }
+    .alert {
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+      border-radius: 6px;
+      color: #be123c;
+      padding: 12px 14px;
+    }
+    table {
+      border-collapse: collapse;
+      overflow: hidden;
+      width: 100%;
+    }
+    th,
+    td {
+      border-bottom: 1px solid #e5eaf1;
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: middle;
+    }
+    th {
+      background: #eef3f9;
+      color: #374151;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+    tr:last-child td {
+      border-bottom: 0;
+    }
+    @media (max-width: 760px) {
+      .app-header {
+        align-items: stretch;
+        flex-direction: column;
+        padding: 18px;
+      }
+      .nav {
+        overflow-x: auto;
+      }
+      .form-grid,
+      .product-form {
+        grid-template-columns: 1fr;
+      }
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
   </style>
 </head>
 <body>
