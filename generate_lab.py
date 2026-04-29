@@ -15,7 +15,7 @@ OUTPUT_DIR = BASE_DIR / 'output'
 BACKENDS = {
     '0': ('none', 'Nenhum backend'),
     '1': ('php', 'PHP'),
-    '2': ('java', 'Java / Spring Boot'),
+    '2': ('java', 'Java Servlet / Tomcat'),
     '3': ('node', 'Node.js / Express'),
     '4': ('python', 'Python / Flask'),
 }
@@ -379,7 +379,7 @@ def lab_info_service(context: dict) -> str:
     ]
     backend_paths = {
         'php': './backend/public/index.php',
-        'java': './backend/src/main/java/lab e ./backend/src/main/resources/application.properties',
+        'java': './backend/src/main/java/lab',
         'node': './backend/src/server.js',
         'python': './backend/app.py',
     }
@@ -611,7 +611,7 @@ def project_readme(context: dict) -> str:
     backend_edit = {
         'none': '- Backend: não gerado nesta combinação',
         'php': '- Backend PHP: `backend/public/index.php`',
-        'java': '- Backend Java: `backend/src/main/java/lab/` e `backend/src/main/resources/application.properties`',
+        'java': '- Backend Java Servlet/Tomcat: `backend/src/main/java/lab/`',
         'node': '- Backend Node: `backend/src/server.js`',
         'python': '- Backend Python: `backend/app.py`',
     }
@@ -953,7 +953,7 @@ def project_readme(context: dict) -> str:
     backend_edit = {
         'none': '- Backend: não gerado nesta combinação',
         'php': '- Backend PHP: `backend/public/index.php`',
-        'java': '- Backend Java: `backend/src/main/java/lab/` e `backend/src/main/resources/application.properties`',
+        'java': '- Backend Java Servlet/Tomcat: `backend/src/main/java/lab/`',
         'node': '- Backend Node: `backend/src/server.js`',
         'python': '- Backend Python: `backend/app.py`',
     }
